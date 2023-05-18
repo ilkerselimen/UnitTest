@@ -7,6 +7,7 @@ import org.junit.jupiter.api.TestInfo;
 
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Test03_BeforeEach_AfterEach {
@@ -21,14 +22,10 @@ public class Test03_BeforeEach_AfterEach {
 
     }
 
-    @AfterEach
-    void afterEach(){
-        str = null;
-        System.out.println("********** AfterEach() calisti **************");
-    }
+
 
     @Test
-    void testSplit(TestInfo info){
+    void testSplit(TestInfo info){ // calisan testin ismini console da gormek icin TestInfo kullanildi
 
         String[] anlikDizi = str.split(" ");
         String[] beklenenDizi = {"JUnit5", "is", "better","than","JUnit4"};
@@ -37,4 +34,22 @@ public class Test03_BeforeEach_AfterEach {
         assertTrue(Arrays.equals(beklenenDizi,anlikDizi));
 
     }
+
+    @Test
+    void testStringLength(){
+
+        int anlikDeger = str.length();
+        int beklenenDeger = 28;
+
+        assertEquals(beklenenDeger,anlikDeger);
+    }
+
+    @AfterEach
+    void afterEach(){
+        str = null;
+        System.out.println("********** AfterEach() calisti **************");
+    }
+
+    // test methodlarinin calisma sirasini kendimiz belirlemek istiyorsak JUnit4 --> @FixMethodOrder
+    // JUnit5 -->@TestMethodOrder
 }
